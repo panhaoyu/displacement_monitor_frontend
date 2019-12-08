@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <div class="left">左侧</div>
+        <div class="right">右侧</div>
+    </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script lang="ts">
+    import HelloWorld from '@/components/HelloWorld.vue';
+    import Axios from 'axios';
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'home',
+        components: {
+            HelloWorld
+        },
+        async beforeMount() {
+            this.$store.commit('setTitle', '首页');
+        }
+    }
 </script>
+
+
+<style lang="sass" scoped>
+    @import "../assets/include"
+    .home
+        @include row-stretch-stretch
+
+        .left
+            @include row-center-center
+            @include color-blue-white
+
+        .right
+            @include row-center-center
+</style>

@@ -1,0 +1,720 @@
+
+@mixin row-start-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-start
+  align-items: flex-start
+
+@mixin row-start-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-start
+  align-items: flex-end
+
+@mixin row-start-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-start
+  align-items: center
+
+@mixin row-start-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-start
+  align-items: stretch
+
+@mixin row-end-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-end
+  align-items: flex-start
+
+@mixin row-end-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-end
+  align-items: flex-end
+
+@mixin row-end-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-end
+  align-items: center
+
+@mixin row-end-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: flex-end
+  align-items: stretch
+
+@mixin row-center-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+  align-items: flex-start
+
+@mixin row-center-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+  align-items: flex-end
+
+@mixin row-center-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+  align-items: center
+
+@mixin row-center-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: center
+  align-items: stretch
+
+@mixin row-stretch-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: stretch
+  align-items: flex-start
+
+@mixin row-stretch-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: stretch
+  align-items: flex-end
+
+@mixin row-stretch-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: stretch
+  align-items: center
+
+@mixin row-stretch-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: stretch
+  align-items: stretch
+
+@mixin row-between-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  align-items: flex-start
+
+@mixin row-between-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  align-items: flex-end
+
+@mixin row-between-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  align-items: center
+
+@mixin row-between-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  align-items: stretch
+
+@mixin row-around-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-around
+  align-items: flex-start
+
+@mixin row-around-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-around
+  align-items: flex-end
+
+@mixin row-around-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-around
+  align-items: center
+
+@mixin row-around-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-around
+  align-items: stretch
+
+@mixin row-evenly-start
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-evenly
+  align-items: flex-start
+
+@mixin row-evenly-end
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-evenly
+  align-items: flex-end
+
+@mixin row-evenly-center
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-evenly
+  align-items: center
+
+@mixin row-evenly-stretch
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-evenly
+  align-items: stretch
+
+@mixin col-start-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-start
+  align-items: flex-start
+
+@mixin col-start-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-start
+  align-items: flex-end
+
+@mixin col-start-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-start
+  align-items: center
+
+@mixin col-start-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-start
+  align-items: stretch
+
+@mixin col-end-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-end
+  align-items: flex-start
+
+@mixin col-end-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-end
+  align-items: flex-end
+
+@mixin col-end-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-end
+  align-items: center
+
+@mixin col-end-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: flex-end
+  align-items: stretch
+
+@mixin col-center-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: center
+  align-items: flex-start
+
+@mixin col-center-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: center
+  align-items: flex-end
+
+@mixin col-center-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: center
+  align-items: center
+
+@mixin col-center-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: center
+  align-items: stretch
+
+@mixin col-stretch-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: stretch
+  align-items: flex-start
+
+@mixin col-stretch-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: stretch
+  align-items: flex-end
+
+@mixin col-stretch-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: stretch
+  align-items: center
+
+@mixin col-stretch-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: stretch
+  align-items: stretch
+
+@mixin col-between-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-between
+  align-items: flex-start
+
+@mixin col-between-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-between
+  align-items: flex-end
+
+@mixin col-between-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-between
+  align-items: center
+
+@mixin col-between-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-between
+  align-items: stretch
+
+@mixin col-around-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-around
+  align-items: flex-start
+
+@mixin col-around-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-around
+  align-items: flex-end
+
+@mixin col-around-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-around
+  align-items: center
+
+@mixin col-around-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-around
+  align-items: stretch
+
+@mixin col-evenly-start
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-evenly
+  align-items: flex-start
+
+@mixin col-evenly-end
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-evenly
+  align-items: flex-end
+
+@mixin col-evenly-center
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-evenly
+  align-items: center
+
+@mixin col-evenly-stretch
+  display: flex
+  flex-flow: column nowrap
+  justify-content: space-evenly
+  align-items: stretch
+
+@mixin self-start-start
+  justify-self: flex-start
+  align-self: flex-start
+
+@mixin self-start-end
+  justify-self: flex-start
+  align-self: flex-end
+
+@mixin self-start-center
+  justify-self: flex-start
+  align-self: center
+
+@mixin self-start-stretch
+  justify-self: flex-start
+  align-self: stretch
+
+@mixin self-end-start
+  justify-self: flex-end
+  align-self: flex-start
+
+@mixin self-end-end
+  justify-self: flex-end
+  align-self: flex-end
+
+@mixin self-end-center
+  justify-self: flex-end
+  align-self: center
+
+@mixin self-end-stretch
+  justify-self: flex-end
+  align-self: stretch
+
+@mixin self-center-start
+  justify-self: center
+  align-self: flex-start
+
+@mixin self-center-end
+  justify-self: center
+  align-self: flex-end
+
+@mixin self-center-center
+  justify-self: center
+  align-self: center
+
+@mixin self-center-stretch
+  justify-self: center
+  align-self: stretch
+
+@mixin self-stretch-start
+  justify-self: stretch
+  align-self: flex-start
+
+@mixin self-stretch-end
+  justify-self: stretch
+  align-self: flex-end
+
+@mixin self-stretch-center
+  justify-self: stretch
+  align-self: center
+
+@mixin self-stretch-stretch
+  justify-self: stretch
+  align-self: stretch
+
+@mixin self-between-start
+  justify-self: space-between
+  align-self: flex-start
+
+@mixin self-between-end
+  justify-self: space-between
+  align-self: flex-end
+
+@mixin self-between-center
+  justify-self: space-between
+  align-self: center
+
+@mixin self-between-stretch
+  justify-self: space-between
+  align-self: stretch
+
+@mixin self-around-start
+  justify-self: space-around
+  align-self: flex-start
+
+@mixin self-around-end
+  justify-self: space-around
+  align-self: flex-end
+
+@mixin self-around-center
+  justify-self: space-around
+  align-self: center
+
+@mixin self-around-stretch
+  justify-self: space-around
+  align-self: stretch
+
+@mixin self-evenly-start
+  justify-self: space-evenly
+  align-self: flex-start
+
+@mixin self-evenly-end
+  justify-self: space-evenly
+  align-self: flex-end
+
+@mixin self-evenly-center
+  justify-self: space-evenly
+  align-self: center
+
+@mixin self-evenly-stretch
+  justify-self: space-evenly
+  align-self: stretch
+
+@mixin color-blue-blue
+  color: #007bff
+  background-color: #007bff
+
+@mixin color-blue-grey
+  color: #007bff
+  background-color: #6c757d
+
+@mixin color-blue-green
+  color: #007bff
+  background-color: #28a745
+
+@mixin color-blue-red
+  color: #007bff
+  background-color: #dc3545
+
+@mixin color-blue-yellow
+  color: #007bff
+  background-color: #ffc107
+
+@mixin color-blue-cyan
+  color: #007bff
+  background-color: #17a2b8
+
+@mixin color-blue-white
+  color: #007bff
+  background-color: #f8f9fa
+
+@mixin color-blue-black
+  color: #007bff
+  background-color: #343a40
+
+@mixin color-grey-blue
+  color: #6c757d
+  background-color: #007bff
+
+@mixin color-grey-grey
+  color: #6c757d
+  background-color: #6c757d
+
+@mixin color-grey-green
+  color: #6c757d
+  background-color: #28a745
+
+@mixin color-grey-red
+  color: #6c757d
+  background-color: #dc3545
+
+@mixin color-grey-yellow
+  color: #6c757d
+  background-color: #ffc107
+
+@mixin color-grey-cyan
+  color: #6c757d
+  background-color: #17a2b8
+
+@mixin color-grey-white
+  color: #6c757d
+  background-color: #f8f9fa
+
+@mixin color-grey-black
+  color: #6c757d
+  background-color: #343a40
+
+@mixin color-green-blue
+  color: #28a745
+  background-color: #007bff
+
+@mixin color-green-grey
+  color: #28a745
+  background-color: #6c757d
+
+@mixin color-green-green
+  color: #28a745
+  background-color: #28a745
+
+@mixin color-green-red
+  color: #28a745
+  background-color: #dc3545
+
+@mixin color-green-yellow
+  color: #28a745
+  background-color: #ffc107
+
+@mixin color-green-cyan
+  color: #28a745
+  background-color: #17a2b8
+
+@mixin color-green-white
+  color: #28a745
+  background-color: #f8f9fa
+
+@mixin color-green-black
+  color: #28a745
+  background-color: #343a40
+
+@mixin color-red-blue
+  color: #dc3545
+  background-color: #007bff
+
+@mixin color-red-grey
+  color: #dc3545
+  background-color: #6c757d
+
+@mixin color-red-green
+  color: #dc3545
+  background-color: #28a745
+
+@mixin color-red-red
+  color: #dc3545
+  background-color: #dc3545
+
+@mixin color-red-yellow
+  color: #dc3545
+  background-color: #ffc107
+
+@mixin color-red-cyan
+  color: #dc3545
+  background-color: #17a2b8
+
+@mixin color-red-white
+  color: #dc3545
+  background-color: #f8f9fa
+
+@mixin color-red-black
+  color: #dc3545
+  background-color: #343a40
+
+@mixin color-yellow-blue
+  color: #ffc107
+  background-color: #007bff
+
+@mixin color-yellow-grey
+  color: #ffc107
+  background-color: #6c757d
+
+@mixin color-yellow-green
+  color: #ffc107
+  background-color: #28a745
+
+@mixin color-yellow-red
+  color: #ffc107
+  background-color: #dc3545
+
+@mixin color-yellow-yellow
+  color: #ffc107
+  background-color: #ffc107
+
+@mixin color-yellow-cyan
+  color: #ffc107
+  background-color: #17a2b8
+
+@mixin color-yellow-white
+  color: #ffc107
+  background-color: #f8f9fa
+
+@mixin color-yellow-black
+  color: #ffc107
+  background-color: #343a40
+
+@mixin color-cyan-blue
+  color: #17a2b8
+  background-color: #007bff
+
+@mixin color-cyan-grey
+  color: #17a2b8
+  background-color: #6c757d
+
+@mixin color-cyan-green
+  color: #17a2b8
+  background-color: #28a745
+
+@mixin color-cyan-red
+  color: #17a2b8
+  background-color: #dc3545
+
+@mixin color-cyan-yellow
+  color: #17a2b8
+  background-color: #ffc107
+
+@mixin color-cyan-cyan
+  color: #17a2b8
+  background-color: #17a2b8
+
+@mixin color-cyan-white
+  color: #17a2b8
+  background-color: #f8f9fa
+
+@mixin color-cyan-black
+  color: #17a2b8
+  background-color: #343a40
+
+@mixin color-white-blue
+  color: #f8f9fa
+  background-color: #007bff
+
+@mixin color-white-grey
+  color: #f8f9fa
+  background-color: #6c757d
+
+@mixin color-white-green
+  color: #f8f9fa
+  background-color: #28a745
+
+@mixin color-white-red
+  color: #f8f9fa
+  background-color: #dc3545
+
+@mixin color-white-yellow
+  color: #f8f9fa
+  background-color: #ffc107
+
+@mixin color-white-cyan
+  color: #f8f9fa
+  background-color: #17a2b8
+
+@mixin color-white-white
+  color: #f8f9fa
+  background-color: #f8f9fa
+
+@mixin color-white-black
+  color: #f8f9fa
+  background-color: #343a40
+
+@mixin color-black-blue
+  color: #343a40
+  background-color: #007bff
+
+@mixin color-black-grey
+  color: #343a40
+  background-color: #6c757d
+
+@mixin color-black-green
+  color: #343a40
+  background-color: #28a745
+
+@mixin color-black-red
+  color: #343a40
+  background-color: #dc3545
+
+@mixin color-black-yellow
+  color: #343a40
+  background-color: #ffc107
+
+@mixin color-black-cyan
+  color: #343a40
+  background-color: #17a2b8
+
+@mixin color-black-white
+  color: #343a40
+  background-color: #f8f9fa
+
+@mixin color-black-black
+  color: #343a40
+  background-color: #343a40
+
+$color-blue: #007bff
+
+$color-grey: #6c757d
+
+$color-green: #28a745
+
+$color-red: #dc3545
+
+$color-yellow: #ffc107
+
+$color-cyan: #17a2b8
+
+$color-white: #f8f9fa
+
+$color-black: #343a40

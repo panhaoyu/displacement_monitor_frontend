@@ -1,0 +1,132 @@
+@import "flex"
+
+$color-bg: #b8a13d
+$color-bg-darken: darken($color-bg, 4)
+$color-bg-darken-darken: darken($color-bg, 8)
+$color-bg-darken-darken-darken: darken($color-bg, 12)
+$color-fg: white
+$border: solid 2px $color-white
+
+@mixin color-normal
+  background-color: $color-bg
+  color: $color-fg
+
+@mixin color-reverse
+  background-color: $color-fg
+  color: $color-black
+
+.card
+  @include self-stretch-stretch
+  @include col-stretch-stretch
+  @include color-normal
+  border: $border
+  border-radius: 6px
+  overflow: auto
+
+  > *
+    border-bottom: $border
+
+    &:last-child
+      border-bottom: none
+
+  > .header, > .body, > .footer
+    margin: 0
+
+  > .header, > .footer
+    flex: 0 1 auto
+    padding: 10px 15px
+
+  > .header
+    @include row-start-center
+
+  > .footer
+    @include col-start-start
+
+  > .header
+    border-bottom: $border
+    font-weight: bold
+    font-size: 14px
+
+  > .body
+    @include col-start-start
+    font-size: 16px
+    padding: 10px 15px
+
+    a
+      color: $color-blue
+
+  > .footer
+    border-top: $border
+    font-style: italic
+    font-size: 14px
+
+  > .image
+    flex: 1 1 auto
+    object-fit: cover
+    max-width: 100%
+
+  > .table
+    flex: 1 1 auto
+    font-size: 14px
+    border-spacing: 0
+    background-color: $color-bg
+    text-align: center
+    border-bottom: none
+
+    tr
+      td, th
+        border-bottom: $border
+
+    td, th
+      background-color: $color-bg
+      padding: 6px 10px
+
+    td a
+      color: $color-blue
+
+  > .pagination
+    @include row-center-stretch
+    @include self-end-stretch
+    padding: 10px 10px
+    flex: 0 0 auto
+    font-size: 14px
+
+    .link
+      padding: 10px
+
+      &:hover
+        background-color: $color-bg
+
+    .active
+      background-color: $color-bg
+
+  > .form
+    @include col-start-stretch
+    padding: 10px
+
+    > input, > select, > button
+      @include row-center-center
+      @include color-reverse
+      outline: none
+      flex: 0 0 auto
+      padding: 6px 10px
+      margin: 10px
+      border: none
+      border-bottom: $border
+
+    > label
+      @include row-start-end
+      height: 40px
+      font-size: 12px
+      flex: 0 0 auto
+
+    > button
+      border: none
+      color: $color-fg
+      background-color: $color-bg-darken
+
+      &:hover
+        background-color: $color-bg-darken-darken
+
+      &:active
+        background-color: $color-bg-darken-darken-darken
