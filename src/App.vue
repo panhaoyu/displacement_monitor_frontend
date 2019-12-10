@@ -1,17 +1,18 @@
 <template>
     <div id="app">
         <aside class="sidebar" v-if="user_full_name">
-            <router-link class="brand" to="/">位移监测系统</router-link>
-            <router-link class="link" to="/"><i class="icon-home"></i>项目概况</router-link>
-            <router-link class="link" to="/"><i class="icon-location"></i>测点信息</router-link>
-            <router-link class="link" to="/"><i class="icon-stat"></i>实时数据</router-link>
-            <router-link class="link" to="/"><i class="icon-table"></i>数据统计</router-link>
-            <router-link class="link" to="/"><i class="icon-database"></i>后台管理</router-link>
-            <router-link class="link" to="/"><i class="icon-phone"></i>关于我们</router-link>
-            <router-link class="link" to="/"><i class="icon-warning"></i>管理员操作</router-link>
+            <router-link class="brand" :to="{name: 'home'}">{{site_title}}</router-link>
+            <router-link
+                    :class="link.classObject"
+                    :to="link.to"
+                    v-for="link in computedLinks" :key="link.title"
+            >
+                <i :class="link.icon"></i>
+                {{link.title}}
+            </router-link>
         </aside>
         <div class="container">
-            <nav class="nav">
+            <nav class="nav" v-if="user">
                 <div class="text">{{title}}</div>
                 <div class="spacer">&nbsp;</div>
                 <div class="text" v-if="user">{{user_full_name}}</div>
@@ -19,23 +20,51 @@
                 <router-link class="link" v-else :to="{name: 'login'}">登录</router-link>
             </nav>
             <router-view class="main"/>
-            <footer class="footer">2019 &copy; 同济大学赵程课题组</footer>
+            <footer v-if="user" class="footer">2019 &copy; 同济大学赵程课题组</footer>
         </div>
     </div>
 </template>
-<script lang="ts">
+<script>
     import {mapState} from "vuex";
-    import {VueRouter} from "vue-router/types/router";
-    import {Vue} from "vue/types/vue";
+
 
     export default {
         name: 'app',
+        data() {
+            return {
+                links: [
+                    {icon: 'home', title: '项目概况', name: 'home'},
+                    {icon: 'location', title: '测点信息', name: 'home'},
+                    {icon: 'stat', title: '实时数据', name: 'home'},
+                    {icon: 'table', title: '数据统计', name: 'home'},
+                    {icon: 'database', title: '后台管理', name: 'home'},
+                    {icon: 'phone', title: '关于我们', name: 'login'},
+                    {icon: 'warning', title: '管理员操作', name: 'login'},
+                ]
+            }
+        },
         computed: {
             ...mapState([
                 "title",
                 "user",
                 "user_full_name",
-            ])
+                "site_title",
+            ]),
+            computedLinks: function () {
+                return this.links.map(item => {
+                    return {
+                        icon: 'icon-' + item.icon,
+                        title: item.title,
+                        to: {
+                            name: item.name,
+                        },
+                        classObject: {
+                            'link': true,
+                            'active': this.$route.name === item.name,
+                        }
+                    }
+                })
+            }
         },
     }
 </script>
@@ -55,7 +84,7 @@
 
             > .brand, > .link
                 @include row-start-center
-                @include color-white-black
+                @include color-normal
                 background-color: #32323A
                 color: $color-white
 
@@ -74,6 +103,9 @@
             > .brand
                 font-size: 22px
                 padding: 24px
+
+            .active
+                background-color: #29282E
 
         > .container
             @include col-stretch-stretch
@@ -116,9 +148,9 @@
         @include color-black-white
         margin: 0
         height: 100vh
-        width: 100vw
+        min-width: 1000px
         font-family: 微软雅黑, serif
-        overflow-y: auto
+        overflow: auto hidden
 
     a
         text-decoration: inherit

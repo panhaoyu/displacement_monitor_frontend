@@ -1,10 +1,10 @@
 @import "flex"
 
-$color-bg: #b8a13d
+$color-bg: white
 $color-bg-darken: darken($color-bg, 4)
 $color-bg-darken-darken: darken($color-bg, 8)
 $color-bg-darken-darken-darken: darken($color-bg, 12)
-$color-fg: white
+$color-fg: #333
 $border: solid 2px $color-white
 
 @mixin color-normal
@@ -21,7 +21,6 @@ $border: solid 2px $color-white
   @include color-normal
   border: $border
   border-radius: 6px
-  overflow: auto
 
   > *
     border-bottom: $border
@@ -62,8 +61,10 @@ $border: solid 2px $color-white
 
   > .image
     flex: 1 1 auto
-    object-fit: cover
     max-width: 100%
+    object-fit: cover
+    padding: 20px
+    border-radius: 30px
 
   > .table
     flex: 1 1 auto
@@ -106,7 +107,6 @@ $border: solid 2px $color-white
 
     > input, > select, > button
       @include row-center-center
-      @include color-reverse
       outline: none
       flex: 0 0 auto
       padding: 6px 10px

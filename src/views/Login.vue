@@ -1,30 +1,28 @@
 <template>
     <div class="login">
-        <div class="card left">
-            <img class="image" src="http://dm.panhaoyu.top:88/media/photos/297450419717499770.png" alt="图片">
-        </div>
-        <div class="card right">
+        <div class="card top">
             <div class="header">登录</div>
             <div class="body">
-                <p>您好，欢迎访问位移监测系统。</p>
-                <p>请登录。</p>
-                <p class="status">{{status}}</p>
+                <p>您好，这里是赵程课题组。</p>
+                <p>欢迎您的访问。</p>
+                <p>请您登录。</p>
+                <p class="status" v-if="status">{{status}}</p>
             </div>
-            <div class="form" @keypress.enter="checkLogin" @input="changeStatus">
+            <form class="form" @keypress.enter="checkLogin" @input="changeStatus">
                 <label for="username">用户名：</label>
                 <input id="username" type="text" v-model="username" placeholder="请输入用户名">
                 <label for="password">密码：</label>
                 <input id="password" type="password" v-model="password" placeholder="请输入密码">
                 <button class="submit" @click="checkLogin">提交</button>
-            </div>
+            </form>
         </div>
     </div>
 </template>
 
-<script lang="ts">
-    import {VueRouter} from "vue-router/types/router";
-    import {Vue} from "vue/types/vue";
+<script>
     import Axios from 'axios'
+    import Shortcut from '../shortcut'
+    import router from '../router/router'
 
     export default {
         name: "Login",
@@ -36,9 +34,9 @@
             }
         },
         methods: {
-            checkLogin: async function (event: Event) {
+            checkLogin: async function (event) {
                 try {
-                    let data = await Axios.post('http://localhost:8001/api/login/', {
+                    let data = await Axios.post('http://dm.panhaoyu.top:88/api/login/', {
                         'username': this.username,
                         'password': this.password,
                     });
@@ -51,21 +49,26 @@
                     };
                     this.$store.commit('setUser', payload);
                     localStorage.setItem('user', JSON.stringify(payload));
-                    this.$router.push(this.$route.query.next);
+                    let response = await Shortcut.get('tunnel/');
+                    let project_id = response['results'][0]['id'];
+                    response = await Shortcut.get('tunnel/' + project_id + '/');
+                    let site_title = response.site_title;
+                    localStorage.setItem('site_title', site_title);
+                    Shortcut.commit('setSiteTitle', site_title);
+                    await router.push(this.$route.query.next ? this.$route.query.next : '/');
                 } catch (e) {
-                    console.log(e);
                     this.status = '登录失败，请重试。';
                     this.username = '';
                     this.password = '';
                 }
             },
-            changeStatus: function (event: Event) {
+            changeStatus: function (event) {
                 this.status = '';
             }
         },
-        beforeRouteEnter: function (to: VueRouter, from: VueRouter, next: Function) {
-            next((vm: Vue) => {
-                vm.$store.commit('setTitle', '登录页');
+        beforeRouteEnter: function (to, from, next) {
+            next(vm => {
+                Shortcut.setTitle('登录页');
             });
         }
     }
@@ -74,10 +77,17 @@
 <style scoped lang="sass">
     @import "../assets/include"
     .login
-        @include row-stretch-stretch
+        @include col-center-center
+        @include color-black-cyan
+        margin: 0 !important
 
-        > .right
+        p
+            padding: 3px
+            margin: 0
+
+        > .top
+            @include self-center-center
             flex: 0 0 auto
             width: 300px
-            margin-left: 20px
+            height: 400px
 </style>
