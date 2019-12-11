@@ -9,7 +9,7 @@
                 <p class="status" v-if="status">{{status}}</p>
             </div>
             <form class="form" @keypress.enter="checkLogin" @input="changeStatus">
-                <label for="username">Tests用户名：</label>
+                <label for="username">用户名：</label>
                 <input id="username" type="text" v-model="username" placeholder="请输入用户名">
                 <label for="password">密码：</label>
                 <input id="password" type="password" v-model="password" placeholder="请输入密码">
