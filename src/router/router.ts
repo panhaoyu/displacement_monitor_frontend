@@ -9,6 +9,7 @@ Vue.use(VueRouter);
 const routes = [
     {path: '/', name: 'home', component: Home},
     {path: '/login', name: 'login', component: () => import('../views/Login.vue'), meta: {escapeAuth: true}},
+    {path: '/point', name: 'point', component: () => import('../views/Point.vue')},
     {path: '/logout', name: 'logout', component: Logout},
 ];
 

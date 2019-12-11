@@ -39,8 +39,12 @@
         data() {
             return {
                 imageUrlList: '',
-                meta: [],
-                summary: [],
+                meta: [
+                    ['加载中', '请稍后'],
+                ],
+                summary: [
+                    ['加载中', '请稍后'],
+                ],
             }
         },
         async beforeMount() {

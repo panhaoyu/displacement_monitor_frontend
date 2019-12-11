@@ -34,7 +34,7 @@
             return {
                 links: [
                     {icon: 'home', title: '项目概况', name: 'home'},
-                    {icon: 'location', title: '测点信息', name: 'home'},
+                    {icon: 'location', title: '测点信息', name: 'point'},
                     {icon: 'stat', title: '实时数据', name: 'home'},
                     {icon: 'table', title: '数据统计', name: 'home'},
                     {icon: 'database', title: '后台管理', name: 'home'},
