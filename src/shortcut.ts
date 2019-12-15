@@ -10,11 +10,21 @@ export default {
     setTitle(title: string) {
         this.commit('setTitle', title);
     },
-    async push(name: string) {
-        await router.push({name: name});
+    push(pathName: string) {
+        return new Promise(resolve => {
+            router.push({name: pathName}, resolve);
+        })
     },
-    async get(url: string) {
-        url = 'http://dm.panhaoyu.top:88/api/' + url;
+    async get(url: string, data?: object) {
+        url = 'http://dm-api.panhaoyu.top:88/' + url;
+        if (data) {
+            if (url.indexOf('?') === -1) {
+                url += '?';
+            }
+            Object.entries(data).forEach(([key, value]) => {
+                url += `&${key}=${value}`;
+            })
+        }
         let response = await fetch(url, {
             method: 'GET',
             mode: 'cors',
@@ -24,6 +34,16 @@ export default {
         });
         let responseData = await response.json();
         return responseData.data;
+    },
+    async post(url: string) {
+        url = 'http://dm-api.panhaoyu.top:88/' + url;
+        let response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Authorization': 'bearer ' + store.state.token,
+            }
+        })
     },
     async timeout(seconds: number) {
         return new Promise<any>(resolve => {

@@ -14,15 +14,13 @@
 
     export default {
         name: "Logout",
-        beforeRouteEnter: function (to: Route, from: Route, next: Function) {
-            next(async (vm: Vue) => {
-                Shortcut.setTitle('登出页');
-                localStorage.removeItem('user');
-                Shortcut.commit('logout');
-                await Shortcut.timeout(3);
-                await Shortcut.push('login');
-            })
-        }
+        async mounted() {
+            Shortcut.setTitle('登出页');
+            localStorage.removeItem('user');
+            Shortcut.commit('logout');
+            await Shortcut.timeout(3);
+            await Shortcut.push('login');
+        },
     }
 </script>
 

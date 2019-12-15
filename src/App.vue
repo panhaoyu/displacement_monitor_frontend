@@ -19,7 +19,7 @@
                 <router-link class="link" v-if="user" :to="{name: 'logout'}">登出</router-link>
                 <router-link class="link" v-else :to="{name: 'login'}">登录</router-link>
             </nav>
-            <router-view class="main"/>
+            <router-view class="main"></router-view>
             <footer v-if="user" class="footer">2019 &copy; 同济大学赵程课题组</footer>
         </div>
     </div>
@@ -35,11 +35,11 @@
                 links: [
                     {icon: 'home', title: '项目概况', name: 'home'},
                     {icon: 'location', title: '测点信息', name: 'point'},
-                    {icon: 'stat', title: '实时数据', name: 'home'},
-                    {icon: 'table', title: '数据统计', name: 'home'},
-                    {icon: 'database', title: '后台管理', name: 'home'},
-                    {icon: 'phone', title: '关于我们', name: 'login'},
-                    {icon: 'warning', title: '管理员操作', name: 'login'},
+                    {icon: 'stat', title: '数据趋势', name: 'tendency'},
+                    // {icon: 'table', title: '数据统计', name: 'home'},
+                    // {icon: 'database', title: '后台管理', name: 'home'},
+                    {icon: 'phone', title: '关于我们', name: 'about'},
+                    // {icon: 'warning', title: '管理员操作', name: 'login'},
                 ]
             }
         },

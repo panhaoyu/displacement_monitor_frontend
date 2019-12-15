@@ -18,8 +18,8 @@
                 <td>{{point.id}}</td>
                 <td>{{point.name}}</td>
                 <td>{{point.info}}</td>
-                <td>{{point.map_x}}</td>
-                <td>{{point.map_y}}</td>
+                <td>{{Math.round(point.map_x * 100) / 100}}</td>
+                <td>{{Math.round(point.map_y * 100) / 100}}</td>
                 <td>{{point.sensors_count}}</td>
                 <td>{{point.is_alarm_opened ? "已开启" : "未开启"}}</td>
             </tr>

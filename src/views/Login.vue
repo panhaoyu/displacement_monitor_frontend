@@ -36,7 +36,7 @@
         methods: {
             checkLogin: async function (event) {
                 try {
-                    let data = await Axios.post('http://dm.panhaoyu.top:88/api/login/', {
+                    let data = await Axios.post('http://dm-api.panhaoyu.top:88/login/', {
                         'username': this.username,
                         'password': this.password,
                     });
@@ -47,7 +47,7 @@
                         user_full_name: data.user_full_name,
                         token: data.token,
                     };
-                    this.$store.commit('setUser', payload);
+                    Shortcut.commit('setUser', payload);
                     localStorage.setItem('user', JSON.stringify(payload));
                     let response = await Shortcut.get('tunnel/');
                     let project_id = response['results'][0]['id'];
@@ -55,7 +55,12 @@
                     let site_title = response.site_title;
                     localStorage.setItem('site_title', site_title);
                     Shortcut.commit('setSiteTitle', site_title);
-                    await router.push(this.$route.query.next ? this.$route.query.next : '/');
+                    let nextPath = this.$route.query.next;
+                    if (nextPath && nextPath !== '/logout') {
+                        await router.push(nextPath);
+                    } else {
+                        await router.push('/');
+                    }
                 } catch (e) {
                     this.status = '登录失败，请重试。';
                     this.username = '';
