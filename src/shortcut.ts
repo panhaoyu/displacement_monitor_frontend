@@ -16,7 +16,7 @@ export default {
         })
     },
     async get(url: string, data?: object) {
-        url = 'http://dm-api.panhaoyu.top:88/' + url;
+        url = 'http://dm-api.panhaoyu.top/' + url;
         if (data) {
             if (url.indexOf('?') === -1) {
                 url += '?';
@@ -36,7 +36,7 @@ export default {
         return responseData.data;
     },
     async post(url: string) {
-        url = 'http://dm-api.panhaoyu.top:88/' + url;
+        url = 'http://dm-api.panhaoyu.top/' + url;
         let response = await fetch(url, {
             method: 'POST',
             mode: 'cors',
