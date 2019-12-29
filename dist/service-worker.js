@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.b8eaaeace0bcfe0ed5ddd03f7fbf259a.js"
+  "/precache-manifest.7f9d196403df532034d06eb3d8bf658a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "displacement-monitor"});
