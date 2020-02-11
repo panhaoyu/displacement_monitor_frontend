@@ -36,7 +36,7 @@
         methods: {
             checkLogin: async function (event) {
                 try {
-                    let data = await Axios.post('http://dm-api.panhaoyu.top/login/', {
+                    let data = await Axios.post('http://dm-api.panhaoyu.com/login/', {
                         'username': this.username,
                         'password': this.password,
                     });
