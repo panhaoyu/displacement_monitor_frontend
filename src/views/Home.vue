@@ -26,7 +26,7 @@
         </div>
         <div class="right card">
             <div class="header">项目图片</div>
-            <img :src="url" v-for="url in imageUrlList" class="image" :key="url" alt="项目图片"/>
+            <img :src="imageUrlList[1]" class="image" :key="url" alt="项目图片"/>
         </div>
     </div>
 </template>
@@ -51,20 +51,17 @@
             Shortcut.setTitle('首页');
             let response = await Shortcut.get('tunnel/1/');
             this.meta = [
-                ['项目名称', response.name],
+                ['项目名称', '示范管廊项目'],
                 ['业主信息', response.company],
                 ['项目完成状态', response.construction_status],
                 ['周边特殊地质', response.environment_status],
-                ['项目编号', response.readable_id],
-                ['项目概况', response.info],
+                ['项目编号', 'Demonstrate utility tunnel'],
+                ['项目概况', '管廊结构纵向变形自动化监测现场应用'],
                 ['项目位置', response.land_block],
-                ['安全评价（未完成）', response.judgement],
-                ['报警开启状态（未完成）', response.is_alarm_opened ? '已开启' : '未开启'],
-                ['预警信息（未完成）', response.warning_status],
             ];
             this.summary = [
-                ['测点数量', response.points_count],
-                ['传感器数量', response.sensors_count],
+                ['测点数量', 5],
+                ['传感器数量', 5],
             ];
 
             response = await Shortcut.get('tunnel/1/photos/');
@@ -97,7 +94,7 @@
 
             .image
                 min-height: 50vh
-                max-height: 50vh
+                //max-height: 50vh
 
 
         .top
