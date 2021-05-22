@@ -5,7 +5,7 @@
         <template #header>
           项目概况
         </template>
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="tableData" style="width: 100%" >
           <el-table-column v-for="column in columnNames"
                            :prop="column.propertyName"
                            :label="column.label"></el-table-column>
@@ -30,7 +30,6 @@ export default defineComponent({
         projectData.points.map(item =>
             Object.fromEntries(projectData.pointColumns.map((label, index) =>
                 [propertyNames.value[index], item[index]]))))
-    console.log(tableData.value)
     return {tableData, imageUrl: projectData.image, columnNames}
   }
 })
