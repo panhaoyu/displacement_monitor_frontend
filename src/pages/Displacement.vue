@@ -31,9 +31,6 @@
               </el-row>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" style="width: 120px" @click="updateCanvas">绘图</el-button>
-          </el-form-item>
         </el-form>
       </el-card>
     </el-col>
@@ -48,9 +45,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, Ref, ref, watch} from 'vue'
+import {computed, defineComponent, markRaw, reactive, Ref, ref, watch} from 'vue'
 import projectData from "../utils/projectData";
 import {Chart, registerables} from "chart.js";
+import EigenvaluesFetcher from "../utils/eigenvaluesFetcher";
 
 Chart.register(...registerables);
 
@@ -61,32 +59,83 @@ export default defineComponent({
     const form = reactive({
       eigenvalueType: 'day',
       timeRange: [Date.now() - defaultTimeDelta, Date.now()],
-      points: [projectData.pointNames.length > 1 ? projectData.pointNames[1] : projectData.pointNames[0]],
+      points: [projectData.pointNames[0]],
+    })
+    const startTime = computed(() => new Date(form.timeRange[0]))
+    const endTime = computed(() => new Date(form.timeRange[1]))
+    const fetcher = new EigenvaluesFetcher()
+    const options = computed(() => {
+      const pointIndex = form.points.map(item => projectData.pointNames.indexOf(item))
+      const sensors = pointIndex.map(item => projectData.pointEigenvalueNames[item])
+      let data
+      switch (form.eigenvalueType) {
+        case 'year':
+          data = fetcher.year(sensors, startTime.value, endTime.value)
+          break
+        case 'month':
+          data = fetcher.month(sensors, startTime.value, endTime.value)
+          break
+        case 'day':
+          data = fetcher.day(sensors, startTime.value, endTime.value)
+          break
+        case 'hour':
+          data = fetcher.hour(sensors, startTime.value, endTime.value)
+          break
+        default:
+          data = fetcher.hour(sensors, startTime.value, endTime.value)
+      }
+      const colors = ['#66B1FF', '#FF6384', '#68CBCB', '#FFCD56']
+      return markRaw({
+        type: 'line',
+        data: {
+          labels: data.labels,
+          datasets: data.data.map((line, lineIndex) => {
+            const color = colors[projectData.pointEigenvalueNames.indexOf(sensors[lineIndex])]
+            return {
+              label: form.points[lineIndex],
+              data: line,
+              borderWidth: 1,
+              // fill: false,
+              backgroundColor: color,
+              borderColor: color,
+            }
+          })
+        },
+        options: {
+          responsive: true, scales: {
+            y: {min: -50, max: 50, title: {text: '沉降（mm）', display: true}},
+            x: {title: {text: '观测时间', display: true}},
+          }
+        }
+      })
     })
 
 
-    function updateCanvas(context: CanvasRenderingContext2D) {
-      new Chart(context, {
-        type: 'bar',
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            data: [12, 19, 3, 5, 2, 3],
-          }]
-        },
-      })
-    }
+    let chart: Chart
 
-
+    const isChartAvailable = ref(false)
     const chartElementRef: Ref<HTMLCanvasElement | null> = ref(null)
     watch(chartElementRef, () => {
-      const element: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('chart')
-      const context = <CanvasRenderingContext2D>element.getContext('2d')
-      updateCanvas(context)
+      if (chartElementRef.value !== null) {
+        isChartAvailable.value = true
+      }
+    })
+
+    watch(isChartAvailable, () => {
+      if (isChartAvailable.value) {
+        const element: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('chart')
+        const context = <CanvasRenderingContext2D>element.getContext('2d')
+        chart = new Chart(context, options.value)
+
+        watch(options, () => {
+          chart.destroy()
+          chart = new Chart(context, options.value)
+        })
+      }
     })
 
 
-    return {form, projectData, chartElement: chartElementRef, updateCanvas}
+    return {form, projectData, chartElement: chartElementRef}
   }
 })
 </script>
