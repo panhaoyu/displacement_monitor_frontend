@@ -1,35 +1,34 @@
 <template>
   <el-container>
-    <el-aside width="200px">Aside</el-aside>
+    <sidebar></sidebar>
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>
+        <h2>灾变预警运维平台：{{ projectName }}</h2>
+      </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>Footer</el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import HelloWorld from './components/Home.vue'
+import HelloWorld from './pages/Project.vue'
+import Sidebar from "./components/Sidebar.vue"
+import projectData from "./utils/projectData";
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Sidebar,
+  },
+  setup() {
+    return {
+      projectName: projectData.projectName,
+    }
   }
 })
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
