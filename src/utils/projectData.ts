@@ -7,6 +7,7 @@ const projectData = reactive({
     image: image,
     pointColumns: ['测点名称', '测点位置', '测点类型', '运行状态', '报警数量', '最近采集时间', '最近测量值'],
     points: [['']],
+    pointNames: [''],
 })
 
 watchEffect(() => {
@@ -29,6 +30,10 @@ watchEffect(() => {
         ['近入口侧第二示范测点', '近入口侧3号测点', '沉降倾角综合测点', '正常运行', '0', '2021-05-22 17:21:00', '11.72'],
         ['近入口侧第三示范测点', '近入口侧4号测点', '沉降倾角综合测点', '正常运行', '0', '2021-05-22 17:21:00', '17.31'],
     ]
+})
+
+watchEffect(() => {
+    projectData.pointNames = projectData.points.map(item => item[0])
 })
 
 export default projectData

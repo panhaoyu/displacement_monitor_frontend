@@ -9,7 +9,7 @@
         <i class="el-icon-location"></i>
         <template #title>测点信息</template>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="3" :route="{name: UrlNames.displacement}">
         <i class="el-icon-notebook-1"></i>
         <template #title>沉降分析</template>
       </el-menu-item>
