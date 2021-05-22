@@ -32,17 +32,27 @@
             </el-checkbox-group>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" style="width: 120px" @click="onSubmit">绘图</el-button>
+            <el-button type="primary" style="width: 120px" @click="updateCanvas">绘图</el-button>
           </el-form-item>
         </el-form>
+      </el-card>
+    </el-col>
+
+    <el-col :span="16">
+      <el-card>
+        <template #header>数据表</template>
+        <canvas ref="chartElement" id="chart" height="260"></canvas>
       </el-card>
     </el-col>
   </el-row>
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import {defineComponent, reactive, Ref, ref, watch} from 'vue'
 import projectData from "../utils/projectData";
+import {Chart, registerables} from "chart.js";
+
+Chart.register(...registerables);
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -54,11 +64,29 @@ export default defineComponent({
       points: [projectData.pointNames.length > 1 ? projectData.pointNames[1] : projectData.pointNames[0]],
     })
 
-    function onSubmit() {
-      alert('提交')
+
+    function updateCanvas(context: CanvasRenderingContext2D) {
+      new Chart(context, {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            data: [12, 19, 3, 5, 2, 3],
+          }]
+        },
+      })
     }
 
-    return {form, onSubmit, projectData}
+
+    const chartElementRef: Ref<HTMLCanvasElement | null> = ref(null)
+    watch(chartElementRef, () => {
+      const element: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('chart')
+      const context = <CanvasRenderingContext2D>element.getContext('2d')
+      updateCanvas(context)
+    })
+
+
+    return {form, projectData, chartElement: chartElementRef, updateCanvas}
   }
 })
 </script>
