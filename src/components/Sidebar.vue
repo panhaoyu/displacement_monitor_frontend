@@ -1,6 +1,5 @@
 <template>
   <el-aside width="200px">
-    <h5>导航</h5>
     <el-menu class="el-menu-vertical-demo">
       <el-menu-item>
         <i class="el-icon-info"></i>
@@ -27,7 +26,7 @@
         <template #title>渗漏分析</template>
       </el-menu-item>
       <el-menu-item>
-        <i class="el-icon-notebook-1"></i>
+        <i class="el-icon-phone"></i>
         <template #title>关于我们</template>
       </el-menu-item>
     </el-menu>

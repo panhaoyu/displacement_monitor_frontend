@@ -27,15 +27,7 @@ import projectData from "../utils/projectData";
 
 export default defineComponent({
   name: 'HelloWorld',
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  },
   setup: () => {
-
-
     const tableData = computed(() => projectData.info.map(item => {
       return {name: item[0], value: item[1]}
     }))
