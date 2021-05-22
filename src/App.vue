@@ -4,9 +4,9 @@
     <el-container>
       <el-header>
         <h2>
-          <span>灾变预警运维平台</span>
-          <span style="font-size: smaller; margin-left: 40px">
-            <el-select v-model="projectName" placeholder="请选择">
+          <span>既有隧道监测与灾害预防系统</span>
+          <span style="font-size: smaller; margin-left: 40px; width: 400px">
+            <el-select v-model="projectName" placeholder="请选择" style="width: 400px">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </span>

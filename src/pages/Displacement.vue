@@ -38,7 +38,7 @@
     <el-col :span="16">
       <el-card>
         <template #header>数据表</template>
-        <canvas ref="chartElement" id="chart" height="260"></canvas>
+        <canvas ref="chartElement" id="chart" height="240"></canvas>
       </el-card>
     </el-col>
   </el-row>
