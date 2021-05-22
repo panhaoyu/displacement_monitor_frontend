@@ -19,7 +19,7 @@ declare interface Project {
     }[]
 }
 
-const allProjects: Ref<Project[]> = ref([{
+export const allProjects: Ref<Project[]> = ref([{
     name: 'project1',
     info: {
         position: '重庆曾家岩',
@@ -49,21 +49,21 @@ const allProjects: Ref<Project[]> = ref([{
         {name: 'CD6', readableName: '厦门第二西通道工程四号示范测点', position: '近入口处第四测点'}],
 }])
 
-const projectName: Ref<string> = ref('project1')
+export const projectName: Ref<string> = ref('project1')
 const project = computed(() => allProjects.value.filter(item => item.name === projectName.value)[0])
 const projectData = reactive({
-    projectName: project.value.info.readableName,
-    info: [['项目名称', project.value.info.readableName],
+    projectName: computed(() => project.value.info.readableName),
+    info: computed(() => [['项目名称', project.value.info.readableName],
         ['主线全长', project.value.info.totalLength],
         ['隧道总长', project.value.info.tunnelLength],
         ['测点数量', `${project.value.points.length}`],
         ['沉降预警情况', '无预警'],
         ['振动预警情况', '无预警'],
         ['火灾预警情况', '无预警'],
-        ['渗漏预警情况', '无预警'],],
-    image: project.value.info.coverImage,
+        ['渗漏预警情况', '无预警'],]),
+    image: computed(() => project.value.info.coverImage),
     pointColumns: ['测点名称', '测点位置', '测点类型', '运行状态', '报警数量', '最近采集时间', '最近测量值'],
-    points: project.value.points.map(item => [
+    points: computed(() => project.value.points.map(item => [
         item.readableName,
         item.position,
         '沉降倾角综合测点',
@@ -79,9 +79,9 @@ const projectData = reactive({
             return [`${datum[1]}-${datum[2]}-${datum[3]} ${datum[4]}:00:00`, Math.round(<number>datum[5] * 1000) / 1000 + 'mm']
         })[0],
         '',
-    ]),
-    pointNames: project.value.points.map(item => item.readableName),
-    pointEigenvalueNames: project.value.points.map(item => item.name),
+    ])),
+    pointNames: computed(() => project.value.points.map(item => item.readableName)),
+    pointEigenvalueNames: computed(() => project.value.points.map(item => item.name)),
 })
 
 

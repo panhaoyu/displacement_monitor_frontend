@@ -31,7 +31,8 @@ export default defineComponent({
     const tableData = computed(() => projectData.info.map(item => {
       return {name: item[0], value: item[1]}
     }))
-    return {tableData, imageUrl: projectData.image}
+    const imageUrl = computed(() => projectData.image)
+    return {tableData, imageUrl}
   }
 })
 </script>
