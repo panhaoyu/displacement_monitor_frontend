@@ -1,9 +1,10 @@
 import Project from "../pages/Project.vue";
 
 import {createRouter, createWebHashHistory} from "vue-router";
+import Points from "../pages/Points.vue";
 
 
-enum UrlNames {
+export enum UrlNames {
     project = 'project',
     points = 'points',
     displacement = 'displacement',
@@ -18,6 +19,7 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {path: '', component: Project, name: UrlNames.project},
+        {path: '/points', component: Points, name: UrlNames.points},
     ],
 })
 
