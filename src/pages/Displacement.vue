@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import {computed, defineComponent, markRaw, reactive, Ref, ref, watch} from 'vue'
-import projectData from "../utils/projectData";
+import projectData, {projectName} from "../utils/projectData";
 import {Chart, registerables} from "chart.js";
 import EigenvaluesFetcher from "../utils/eigenvaluesFetcher";
 
@@ -61,6 +61,11 @@ export default defineComponent({
       timeRange: [Date.now() - defaultTimeDelta, Date.now()],
       points: [projectData.pointNames[0]],
     })
+
+    watch(projectName, () => {
+      form.points = [projectData.pointNames[0]]
+    })
+
     const startTime = computed(() => new Date(form.timeRange[0]))
     const endTime = computed(() => new Date(form.timeRange[1]))
     const fetcher = new EigenvaluesFetcher()
