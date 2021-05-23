@@ -99,7 +99,7 @@ export default defineComponent({
             return {
               label: form.points[lineIndex],
               data: line,
-              borderWidth: 1,
+              // borderWidth: 0,
               // fill: false,
               backgroundColor: color,
               borderColor: color,
@@ -107,6 +107,10 @@ export default defineComponent({
           })
         },
         options: {
+          lineTension: 0.6,
+          elements: {
+            point: {radius: 0},
+          },
           responsive: true, scales: {
             y: {min: -50, max: 50, title: {text: '沉降（mm）', display: true}},
             x: {title: {text: '观测时间', display: true}},
