@@ -1,6 +1,10 @@
 import {computed, reactive, Ref, ref} from "vue";
-import image1 from "../assets/project-1-field.jpg"
-import image2 from "../assets/project-2-field.jpg"
+import zeng1 from "../assets/曾家岩隧道现场1.jpg"
+import zeng2 from '../assets/曾家岩隧道现场2.jpg'
+import zengPosition from '../assets/曾家岩大桥位置.jpg'
+import hai1 from "../assets/海沧隧道现场1.jpg"
+import hai2 from "../assets/海沧隧道现场2.jpg"
+import haiPosition from '../assets/海沧隧道位置.png'
 import eigenvalues from '../assets/eigenvalues.json'
 
 declare interface Project {
@@ -10,7 +14,9 @@ declare interface Project {
         readableName: string
         totalLength: string
         tunnelLength: string
-        coverImage: string
+        coverImage1: string
+        coverImage2: string
+        positionImage: string
     },
     points: {
         name: string
@@ -26,7 +32,9 @@ export const allProjects: Ref<Project[]> = ref([{
         readableName: '重庆曾家岩大桥隧道工程',
         totalLength: '5.51KM',
         tunnelLength: '4.69KM',
-        coverImage: image1
+        coverImage1: zeng1,
+        coverImage2: zeng2,
+        positionImage: zengPosition,
     },
     points: [
         {name: 'CD10', readableName: '曾家岩大桥隧道工程一号示范测点', position: '近入口处第一测点'},
@@ -40,7 +48,9 @@ export const allProjects: Ref<Project[]> = ref([{
         readableName: '厦门第二西通道（海沧隧道）工程',
         totalLength: '7.1KM',
         tunnelLength: '6.306KM',
-        coverImage: image2
+        coverImage1: hai1,
+        coverImage2: hai2,
+        positionImage: haiPosition,
     },
     points: [
         {name: 'CD3', readableName: '厦门第二西通道工程一号示范测点', position: '近入口处第一测点'},
@@ -61,7 +71,9 @@ const projectData = reactive({
         ['结构变形预警', '无预警'],
         ['水害预警', '无预警'],
         ['材料劣化预警', '无预警'],]),
-    image: computed(() => project.value.info.coverImage),
+    coverImage1: computed(() => project.value.info.coverImage1),
+    coverImage2: computed(() => project.value.info.coverImage2),
+    positionImage: computed(() => project.value.info.positionImage),
     pointColumns: ['测点名称', '测点位置', '测点类型', '运行状态', '报警数量', '最近采集时间', '最近测量值'],
     points: computed(() => project.value.points.map(item => [
         item.readableName,

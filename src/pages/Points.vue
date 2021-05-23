@@ -30,7 +30,7 @@ export default defineComponent({
         projectData.points.map(item =>
             Object.fromEntries(projectData.pointColumns.map((label, index) =>
                 [propertyNames.value[index], item[index]]))))
-    return {tableData, imageUrl: projectData.image, columnNames}
+    return {tableData, imageUrl1: projectData.coverImage1, columnNames}
   }
 })
 </script>
