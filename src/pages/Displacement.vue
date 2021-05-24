@@ -45,10 +45,10 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, markRaw, reactive, Ref, ref, watch} from 'vue'
+import {computed, defineComponent, markRaw, reactive, Ref, ref, watch, watchEffect} from 'vue'
 import projectData, {projectName} from "../utils/projectData";
 import {Chart, registerables} from "chart.js";
-import EigenvaluesFetcher from "../utils/eigenvaluesFetcher";
+import EigenvaluesFetcher, {FetcherResponse} from "../utils/eigenvaluesFetcher";
 
 Chart.register(...registerables);
 
@@ -66,57 +66,84 @@ export default defineComponent({
       form.points = [projectData.pointNames[0]]
     })
 
-    const startTime = computed(() => new Date(form.timeRange[0]))
-    const endTime = computed(() => new Date(form.timeRange[1]))
+
     const fetcher = new EigenvaluesFetcher()
+    const data: Ref<FetcherResponse | null> = ref(null)
+    //如果正在进行数据更新，避免嵌套执行函数
+    let isDataUpdating = false
+    watchEffect(() => {
+      if (!isDataUpdating) {
+        isDataUpdating = true
+
+        const startTime = new Date(form.timeRange[0])
+        const endTime = new Date(form.timeRange[1])
+        const pointIndex = form.points.map(item => projectData.pointNames.indexOf(item))
+        const sensors = pointIndex.map(item => projectData.pointEigenvalueNames[item])
+
+
+        let result
+        switch (form.eigenvalueType) {
+          case 'year':
+            result = fetcher.year(sensors, startTime, endTime)
+            break
+          case 'month':
+            result = fetcher.month(sensors, startTime, endTime)
+            break
+          case 'day':
+            result = fetcher.day(sensors, startTime, endTime)
+            break
+          case 'hour':
+            result = fetcher.hour(sensors, startTime, endTime)
+            break
+          default:
+            result = fetcher.hour(sensors, startTime, endTime)
+        }
+        data.value = result
+
+        if (result.times.length > 0) {
+          form.timeRange = [result.times[0].getTime(), result.times[result.times.length - 1].getTime()]
+        }
+
+        isDataUpdating = false
+      }
+    })
+
+
     const options = computed(() => {
       const pointIndex = form.points.map(item => projectData.pointNames.indexOf(item))
       const sensors = pointIndex.map(item => projectData.pointEigenvalueNames[item])
-      let data
-      switch (form.eigenvalueType) {
-        case 'year':
-          data = fetcher.year(sensors, startTime.value, endTime.value)
-          break
-        case 'month':
-          data = fetcher.month(sensors, startTime.value, endTime.value)
-          break
-        case 'day':
-          data = fetcher.day(sensors, startTime.value, endTime.value)
-          break
-        case 'hour':
-          data = fetcher.hour(sensors, startTime.value, endTime.value)
-          break
-        default:
-          data = fetcher.hour(sensors, startTime.value, endTime.value)
-      }
       const colors = ['#66B1FF', '#FF6384', '#68CBCB', '#FFCD56']
-      return markRaw({
-        type: 'line',
-        data: {
-          labels: data.labels,
-          datasets: data.data.map((line, lineIndex) => {
-            const color = colors[projectData.pointEigenvalueNames.indexOf(sensors[lineIndex])]
-            return {
-              label: form.points[lineIndex],
-              data: line,
-              // borderWidth: 0,
-              // fill: false,
-              backgroundColor: color,
-              borderColor: color,
-            }
-          })
-        },
-        options: {
-          lineTension: 0.6,
-          elements: {
-            point: {radius: 0},
+      if (data.value === null) {
+        return markRaw({type: 'line'})
+      } else {
+        return markRaw({
+          type: 'line',
+          data: {
+            labels: data.value.labels,
+            datasets: data.value.data.map((line, lineIndex) => {
+              const color = colors[projectData.pointEigenvalueNames.indexOf(sensors[lineIndex])]
+              return {
+                label: form.points[lineIndex],
+                data: line,
+                // borderWidth: 0,
+                // fill: false,
+                backgroundColor: color,
+                borderColor: color,
+              }
+            })
           },
-          responsive: true, scales: {
-            y: {min: -50, max: 50, title: {text: '沉降（mm）', display: true}},
-            x: {title: {text: '观测时间', display: true}},
+          options: {
+            lineTension: 0.5,
+            elements: {
+              point: {radius: 0},
+            },
+            responsive: true, scales: {
+              y: {min: -50, max: 50, title: {text: '沉降（mm）', display: true}},
+              x: {title: {text: '观测时间', display: true}},
+            }
           }
-        }
-      })
+        })
+      }
     })
 
 

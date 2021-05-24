@@ -1,5 +1,11 @@
 import eigenvalues from '../assets/eigenvalues.json'
 
+export interface FetcherResponse {
+    labels: string[],
+    data: number[][],
+    times: Date[]
+}
+
 export default class EigenvaluesFetcher {
     private hourEigenvalues: [string, Date, number][]
     private dayEigenvalues: [string, Date, number][]
@@ -35,53 +41,57 @@ export default class EigenvaluesFetcher {
         this.yearEigenvalues.sort(sort)
     }
 
-    year(sensors: string[], start: Date, end: Date): { labels: string[], data: number[][] } {
+    year(sensors: string[], start: Date, end: Date): FetcherResponse {
         const convertedStart = new Date(start.getFullYear(), 1, 1, 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear() + 1, 1, 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.yearEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
         if (lines.length === 0) {
-            return {labels: [], data: []}
+            return {labels: [], data: [], times: []}
         }
         return {
+            times: lines[0].map(item => item[1]),
             labels: lines[0].map(item => `${item[1].getFullYear()}`),
             data: lines.map(line => line.map(item => item[2])),
         }
     }
 
-    month(sensors: string[], start: Date, end: Date): { labels: string[], data: number[][] } {
+    month(sensors: string[], start: Date, end: Date): FetcherResponse {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), 1, 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth() + 1, 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.monthEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
         if (lines.length === 0) {
-            return {labels: [], data: []}
+            return {labels: [], data: [], times: []}
         }
         return {
+            times: lines[0].map(item => item[1]),
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}`),
             data: lines.map(line => line.map(item => item[2])),
         }
     }
 
-    day(sensors: string[], start: Date, end: Date): { labels: string[], data: number[][] } {
+    day(sensors: string[], start: Date, end: Date): FetcherResponse {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.dayEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
         if (lines.length === 0) {
-            return {labels: [], data: []}
+            return {labels: [], data: [], times: []}
         }
         return {
+            times: lines[0].map(item => item[1]),
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}-${item[1].getDate()}`),
             data: lines.map(line => line.map(item => item[2])),
         }
     }
 
-    hour(sensors: string[], start: Date, end: Date): { labels: string[], data: number[][] } {
+    hour(sensors: string[], start: Date, end: Date): FetcherResponse {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate(), end.getHours(), 1, 1)
         const lines = sensors.map(sensor => this.hourEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
         if (lines.length === 0) {
-            return {labels: [], data: []}
+            return {labels: [], data: [], times: []}
         }
         return {
+            times: lines[0].map(item => item[1]),
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}-${item[1].getDate()}-${item[1].getHours()}`),
             data: lines.map(line => line.map(item => item[2])),
         }
