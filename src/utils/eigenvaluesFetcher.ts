@@ -23,12 +23,25 @@ export default class EigenvaluesFetcher {
             const date = new Date(<number>item[1], 5, 5, 5, 5, 5)
             return [<string>item[0], date, <number>item[2]]
         })
+
+
+        function sort(a: [string, Date, number], b: [string, Date, number]) {
+            return a[1] > b[1] ? 1 : -1
+        }
+
+        this.hourEigenvalues.sort(sort)
+        this.dayEigenvalues.sort(sort)
+        this.monthEigenvalues.sort(sort)
+        this.yearEigenvalues.sort(sort)
     }
 
     year(sensors: string[], start: Date, end: Date): { labels: string[], data: number[][] } {
         const convertedStart = new Date(start.getFullYear(), 1, 1, 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear() + 1, 1, 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.yearEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
+        if (lines.length === 0) {
+            return {labels: [], data: []}
+        }
         return {
             labels: lines[0].map(item => `${item[1].getFullYear()}`),
             data: lines.map(line => line.map(item => item[2])),
@@ -39,6 +52,9 @@ export default class EigenvaluesFetcher {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), 1, 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth() + 1, 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.monthEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
+        if (lines.length === 0) {
+            return {labels: [], data: []}
+        }
         return {
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}`),
             data: lines.map(line => line.map(item => item[2])),
@@ -49,6 +65,9 @@ export default class EigenvaluesFetcher {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), start.getDate(), 1, 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1, 1, 1, 1)
         const lines = sensors.map(sensor => this.dayEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
+        if (lines.length === 0) {
+            return {labels: [], data: []}
+        }
         return {
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}-${item[1].getDate()}`),
             data: lines.map(line => line.map(item => item[2])),
@@ -59,6 +78,9 @@ export default class EigenvaluesFetcher {
         const convertedStart = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), 1, 1)
         const convertedEnd = new Date(end.getFullYear(), end.getMonth(), end.getDate(), end.getHours(), 1, 1)
         const lines = sensors.map(sensor => this.hourEigenvalues.filter(item => item[0] == sensor && convertedStart < item[1] && item[1] < convertedEnd))
+        if (lines.length === 0) {
+            return {labels: [], data: []}
+        }
         return {
             labels: lines[0].map(item => `${item[1].getFullYear()}-${item[1].getMonth() + 1}-${item[1].getDate()}-${item[1].getHours()}`),
             data: lines.map(line => line.map(item => item[2])),

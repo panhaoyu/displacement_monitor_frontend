@@ -21,7 +21,7 @@
         </el-menu-item>
         <el-menu-item index="2-2">
           <i class="el-icon-notebook-1"></i>
-          <template #title>三轴数据</template>
+          <template #title>振动数据</template>
         </el-menu-item>
         <el-menu-item index="2-3">
           <i class="el-icon-notebook-1"></i>
