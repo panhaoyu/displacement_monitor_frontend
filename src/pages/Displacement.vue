@@ -38,6 +38,8 @@
     <el-col :span="16">
       <el-card>
         <template #header>数据表</template>
+        <!--        在制作PPT四图的时候，可以将高度设置为150-->
+        <!--        <canvas ref="chartElement" id="chart" height="150"></canvas>-->
         <canvas ref="chartElement" id="chart" height="240"></canvas>
       </el-card>
     </el-col>
