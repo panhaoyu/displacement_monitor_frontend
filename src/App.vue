@@ -33,8 +33,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      projectName: projectData.projectName,
-      projectName: projectName,
+      projectName,
       options: allProjects.value.map(project => {
         return {
           value: project.name,
