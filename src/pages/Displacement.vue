@@ -134,10 +134,12 @@ export default defineComponent({
       if (isChartAvailable.value) {
         const element: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('chart')
         const context = <CanvasRenderingContext2D>element.getContext('2d')
+        //@ts-ignore
         chart = new Chart(context, options.value)
 
         watch(options, () => {
           chart.destroy()
+          //@ts-ignore
           chart = new Chart(context, options.value)
         })
       }
