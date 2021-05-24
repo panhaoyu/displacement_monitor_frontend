@@ -37,10 +37,10 @@ export const allProjects: Ref<Project[]> = ref([{
         positionImage: zengPosition,
     },
     points: [
-        {name: 'CD10', readableName: '曾家岩大桥隧道工程一号示范测点', position: '近入口处第一测点'},
-        {name: 'CD11', readableName: '曾家岩大桥隧道工程二号示范测点', position: '近入口处第二测点'},
-        {name: 'CD12', readableName: '曾家岩大桥隧道工程三号示范测点', position: '近入口处第三测点'},
-        {name: 'CD13', readableName: '曾家岩大桥隧道工程四号示范测点', position: '近入口处第四测点'}],
+        {name: 'CD3', readableName: '曾家岩大桥隧道工程一号示范测点', position: '近入口处第一测点'},
+        {name: 'CD4', readableName: '曾家岩大桥隧道工程二号示范测点', position: '近入口处第二测点'},
+        {name: 'CD5', readableName: '曾家岩大桥隧道工程三号示范测点', position: '近入口处第三测点'},
+        {name: 'CD6', readableName: '曾家岩大桥隧道工程四号示范测点', position: '近入口处第四测点'}],
 }, {
     name: 'project2',
     info: {
@@ -53,10 +53,10 @@ export const allProjects: Ref<Project[]> = ref([{
         positionImage: haiPosition,
     },
     points: [
-        {name: 'CD3', readableName: '厦门第二西通道工程一号示范测点', position: '近入口处第一测点'},
-        {name: 'CD4', readableName: '厦门第二西通道工程二号示范测点', position: '近入口处第二测点'},
-        {name: 'CD5', readableName: '厦门第二西通道工程三号示范测点', position: '近入口处第三测点'},
-        {name: 'CD6', readableName: '厦门第二西通道工程四号示范测点', position: '近入口处第四测点'}],
+        {name: 'CD10', readableName: '厦门第二西通道工程一号示范测点', position: '近入口处第一测点'},
+        {name: 'CD11', readableName: '厦门第二西通道工程二号示范测点', position: '近入口处第二测点'},
+        {name: 'CD12', readableName: '厦门第二西通道工程三号示范测点', position: '近入口处第三测点'},
+        {name: 'CD13', readableName: '厦门第二西通道工程四号示范测点', position: '近入口处第四测点'}],
 }])
 
 export const projectName: Ref<string> = ref('project1')
